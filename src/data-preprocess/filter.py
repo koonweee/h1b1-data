@@ -31,7 +31,7 @@ def filterLCAFileForH1B1Only(filename, rootPath, outputPath):
           # if so, skip
           continue
         cell_column = cell.column
-        new_cell = outWS.cell(column=cell_column, row=write_row, value=cell.value)
+        outWS.cell(column=cell_column, row=write_row, value=cell.value)
       write_row += 1
     row_index += 1
 

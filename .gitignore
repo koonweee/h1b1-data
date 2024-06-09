@@ -41,6 +41,7 @@ yarn-error.log*
 # xlsx
 /src/data-preprocess/data/*
 /src/data-preprocess/filtered-data/*
+/src/data-preprocess/json/*
 
 # package lock
 package-lock.json

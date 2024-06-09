@@ -171,16 +171,17 @@ export async function getAllLCAData(dataDir: string): Promise<LCADisclosure[]> {
     // Iterate over all xlsx files in dataDir
     const fs = require('fs');
     const files = fs.readdirSync(dataDir);
-    const allLCAs: LCADisclosure[] = [];
-    for (const file of files) {
+
+    const results: LCADisclosure[][] = await Promise.all(files.map(async (file: any) => {
         // skip non-xlsx files
         if (!file.endsWith('.xlsx') || file.startsWith('~$')) {
-            continue;
+            return [];
         }
         const LCAs = await getLCAData(dataDir, file);
-        allLCAs.push(...LCAs);
-    }
-    return allLCAs;
+        return LCAs;
+    }));
+
+    return results.flatMap((LCAs) => LCAs);
 }
 
 export async function getLCAData(dataDir: string, filename: string): Promise<LCADisclosure[]> {
